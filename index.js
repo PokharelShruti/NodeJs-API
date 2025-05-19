@@ -30,6 +30,19 @@ else{
 
 }
 });
+
+app.delete('/products/:id',(req,res)=>{
+    const id=parseInt(req.params.id)
+    const index=products.findIndex(p=>p.id===id)
+    if(index !==-1){
+        products.splice(index,1);
+        res.json({message: `Product with id ${id} is deleted`});
+    }
+    else{
+        res.status(404).json({message:'Product Not Found'});
+    }
+});
+
 app.listen(3000,()=>{
     console.log('Server running on http://localhost:3000');
 });
