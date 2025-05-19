@@ -20,7 +20,15 @@ app.post('/products',(req,res)=>{
 app.put('/products/:id', (req,res)=>{
 const id=parseInt(req.params.id);
 const updatedProduct=req.body;
+const index = products.findIndex(p=>p.id===id)
+if (index!==-1){
+    products[index]=updatedProduct;
+res.json(updatedProduct);
+}
+else{
+    res.status(404).json({message:'Product Not Found'})
 
+}
 });
 app.listen(3000,()=>{
     console.log('Server running on http://localhost:3000');
